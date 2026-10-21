@@ -60,3 +60,20 @@
 // -------------------------------------------------------------
 // BONUS : LocalStorage, Fetch API, tri, comparaison
 // -------------------------------------------------------------
+
+const grid = document.getElementById("grid");
+
+for (let i = 0; i < creatures.length; i++) {
+    const c = creatures[i];
+    const card = `
+  <article class="flex flex-col gap-3 rounded-card bg-white p-3 pb-4">
+    <img src="${c.image}" alt="${c.name}" class="h-28 w-28 mx-auto">
+    <h3 class="font-display text-xl font-semibold">${c.name}</h3>
+    <p class="text-sm text-muted">Type: ${c.type.join(", ")}</p>
+    <p class="text-sm text-muted">HP: ${c.stats.hp}</p>
+    <button type="button" class="btn-outline">Ajouter à l'équipe</button>
+  </article>
+`;
+grid.innerHTML += card;
+}
+console.log(grid.innerHTML)
