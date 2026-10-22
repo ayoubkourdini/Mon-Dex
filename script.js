@@ -60,8 +60,9 @@
 // -------------------------------------------------------------
 // BONUS : LocalStorage, Fetch API, tri, comparaison
 // -------------------------------------------------------------
-
+function affichage(){
 const grid = document.getElementById("grid");
+grid.innerHTML = "";
 
 for (let i = 0; i < creatures.length; i++) {
     const c = creatures[i];
@@ -76,4 +77,18 @@ for (let i = 0; i < creatures.length; i++) {
 `;
 grid.innerHTML += card;
 }
-console.log(grid.innerHTML)
+}
+affichage()
+
+function detail() {};
+
+function recherche() {};
+
+function filter() {};
+
+function creeCreature() {};
+
+function monEquipe() {};
+
+function regleEquipe() {};
+
