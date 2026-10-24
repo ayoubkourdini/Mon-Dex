@@ -18,7 +18,7 @@
 
 const creatures = [
   {
-    id: "001",
+    id: "#001",
     name: "Bulbasaur",
     type: ["Plante"],
     level: "Base",
@@ -27,7 +27,7 @@ const creatures = [
     description: "Un Pokémon graine qui porte un bulbe sur le dos et le nourrit grâce au soleil."
   },
   {
-    id: "004",
+    id: "#004",
     name: "Charmander",
     type: ["Feu"],
     level: "Base",
@@ -36,7 +36,7 @@ const creatures = [
     description: "Un petit lézard dont la flamme au bout de la queue reflète sa santé."
   },
   {
-    id: "006",
+    id: "#006",
     name: "Charizard",
     type: ["Feu"],
     level: "Final",
@@ -45,7 +45,7 @@ const creatures = [
     description: "Un dragon ailé qui crache des flammes brûlantes et vole très haut."
   },
   {
-    id: "007",
+    id: "#007",
     name: "Squirtle",
     type: ["Eau"],
     level: "Base",
@@ -54,7 +54,7 @@ const creatures = [
     description: "Une petite tortue qui se protège dans sa carapace et lance des jets d'eau."
   },
   {
-    id: "025",
+    id: "#025",
     name: "Pikachu",
     type: ["Électrik"],
     level: "Intermédiaire",
@@ -63,7 +63,7 @@ const creatures = [
     description: "Une souris électrique qui stocke l'énergie dans les poches de ses joues."
   },
   {
-    id: "039",
+    id: "#039",
     name: "Jigglypuff",
     type: ["Fée"],
     level: "Base",
@@ -72,7 +72,7 @@ const creatures = [
     description: "Sa berceuse endort tous ceux qui l'entendent, même les plus agités."
   },
   {
-    id: "052",
+    id: "#052",
     name: "Meowth",
     type: ["Normal"],
     level: "Base",
@@ -81,7 +81,7 @@ const creatures = [
     description: "Un chat rusé qui adore les objets brillants, surtout les pièces."
   },
   {
-    id: "054",
+    id: "#054",
     name: "Psyduck",
     type: ["Eau"],
     level: "Base",
@@ -90,7 +90,7 @@ const creatures = [
     description: "Un canard distrait qui a souvent mal à la tête et libère alors ses pouvoirs."
   },
   {
-    id: "066",
+    id: "#066",
     name: "Machop",
     type: ["Combat"],
     level: "Base",
@@ -99,7 +99,7 @@ const creatures = [
     description: "Un Pokémon musclé qui s'entraîne sans relâche et soulève des charges énormes."
   },
   {
-    id: "074",
+    id: "#074",
     name: "Geodude",
     type: ["Roche"],
     level: "Base",
@@ -108,7 +108,7 @@ const creatures = [
     description: "Un rocher vivant qu'on confond facilement avec une pierre au bord du chemin."
   },
   {
-    id: "092",
+    id: "#092",
     name: "Gastly",
     type: ["Spectre"],
     level: "Base",
@@ -117,7 +117,7 @@ const creatures = [
     description: "Un être de gaz toxique qui flotte dans l'ombre et surprend les passants."
   },
   {
-    id: "094",
+    id: "#094",
     name: "Gengar",
     type: ["Spectre"],
     level: "Final",
