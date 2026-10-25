@@ -119,6 +119,10 @@ grid.addEventListener("click", function (event) {
 
   detail(c);
 });
+document.getElementById("detail-close").addEventListener("click", function () {
+  panneau.classList.add("hidden");
+  panneau.classList.remove("flex");
+});
 
 function recherche(event) {
   const texte = event.target.value.trim().toLowerCase();
