@@ -60,12 +60,17 @@
 // -------------------------------------------------------------
 // BONUS : LocalStorage, Fetch API, tri, comparaison
 // -------------------------------------------------------------
-function affichage(){
+
 const grid = document.getElementById("grid");
+const panneau = document.getElementById("panneau");
+const search = document.getElementById("search");
+
+
+function affichage(liste){
 grid.innerHTML = "";
 
-for (let i = 0; i < creatures.length; i++) {
-    const c = creatures[i];
+for (let i = 0; i < liste.length; i++) {
+    const c = liste[i];
     const card = `
   <article data-id="${c.id}" class="flex flex-col cursor-pointer gap-3 rounded-card bg-white p-3 pb-4">
     <img src="${c.image}" alt="${c.name}" class="h-28 w-28 mx-auto">
@@ -78,10 +83,9 @@ for (let i = 0; i < creatures.length; i++) {
 grid.innerHTML += card;
 }
 }
-affichage()
+affichage(creatures)
 
 function detail(c) {
-  const panneau = document.getElementById("panneau");
   document.getElementById("detail-id").textContent = c.id + " · Détail";
   document.getElementById("detail-name").textContent = c.name;
   document.getElementById("detail-type").textContent = c.type.join(", ");
@@ -116,12 +120,19 @@ grid.addEventListener("click", function (event) {
   detail(c);
 });
 
-document.getElementById("detail-close").addEventListener("click", function () {
-  panneau.classList.add("hidden");
-  panneau.classList.remove("flex");
-});
+function recherche(event) {
+  const texte = event.target.value.trim().toLowerCase();
+  const resultats = [];
+  for (let i = 0; i < creatures.length; i++) {
+    const nom = creatures[i].name.toLowerCase();
+    if (nom.includes(texte)) {
+      resultats.push(creatures[i]);
+    }
+  }
+  affichage(resultats);
+}
 
-function recherche() {};
+search.addEventListener("input", recherche);
 
 function filter() {};
 
