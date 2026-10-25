@@ -60,16 +60,16 @@
 // -------------------------------------------------------------
 // BONUS : LocalStorage, Fetch API, tri, comparaison
 // -------------------------------------------------------------
-
 const grid = document.getElementById("grid");
 const panneau = document.getElementById("panneau");
 const search = document.getElementById("search");
+let texteActuel = "";
+let typeActuel = "Tous";
 
+function affichage(liste) {
+  grid.innerHTML = "";
 
-function affichage(liste){
-grid.innerHTML = "";
-
-for (let i = 0; i < liste.length; i++) {
+  for (let i = 0; i < liste.length; i++) {
     const c = liste[i];
     const card = `
   <article data-id="${c.id}" class="flex flex-col cursor-pointer gap-3 rounded-card bg-white p-3 pb-4">
@@ -80,8 +80,8 @@ for (let i = 0; i < liste.length; i++) {
     <button type="button" data-id="${c.id}" data-action="add" class="btn-outline">Ajouter à l'équipe</button>
   </article>
 `;
-grid.innerHTML += card;
-}
+    grid.innerHTML += card;
+  }
 }
 affichage(creatures)
 
@@ -125,24 +125,43 @@ document.getElementById("detail-close").addEventListener("click", function () {
 });
 
 function recherche(event) {
-  const texte = event.target.value.trim().toLowerCase();
-  const resultats = [];
-  for (let i = 0; i < creatures.length; i++) {
-    const nom = creatures[i].name.toLowerCase();
-    if (nom.includes(texte)) {
-      resultats.push(creatures[i]);
-    }
-  }
-  affichage(resultats);
+  texteActuel = event.target.value.trim().toLowerCase();
+  filter()
 }
 
 search.addEventListener("input", recherche);
 
-function filter() {};
+function filter() {
+  const resultats = [];
 
-function creeCreature() {};
+  for (let i = 0; i < creatures.length; i++) {
+    const c = creatures[i];
+    const nom = c.name.toLowerCase();
 
-function monEquipe() {};
+    if (nom.includes(texteActuel)) {
+      if (typeActuel === "Tous") {
+        resultats.push(c);
+      } else if (c.type.includes(typeActuel)) {
+        resultats.push(c);
+      }
+    }
+  }
 
-function regleEquipe() {};
+  affichage(resultats);
+}
+
+const boutons = document.querySelectorAll("#filters button");
+
+for (let i = 0; i < boutons.length; i++) {
+  boutons[i].addEventListener("click", function () {
+    typeActuel = boutons[i].textContent;
+    filter();
+  });
+}
+
+function creeCreature() { };
+
+function monEquipe() { };
+
+function regleEquipe() { };
 
