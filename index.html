@@ -51,7 +51,7 @@
       <div id="filters" role="group" aria-label="Filtrer par type"
         class="flex flex-nowrap gap-2 lg:overflow-hidden overflow-x-auto">
         <button type="button" class="chip bg-ink text-white border-ink shrink-0">Tous</button>
-        <button type="button" class="chip shrink-0">Feu</button>
+        <button type="button" class="chip shrink-0" id="typeFeu">Feu</button>
         <button type="button" class="chip shrink-0">Eau</button>
         <button type="button" class="chip shrink-0">Plante</button>
         <button type="button" class="chip shrink-0">Électrik</button>
@@ -133,11 +133,11 @@
       <form id="creature-form" novalidate class="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-4">
         <label class="flex flex-col gap-1 text-sm font-bold">Numéro
           <input name="id" type="text" placeholder="#010" class="field font-normal">
-          <span class="error-message text-sm font-normal text-muted"></span>
+          <span id="erreur-numero" class="error-message text-sm font-normal text-muted"></span>
         </label>
         <label class="flex flex-col gap-1 text-sm font-bold">Nom
           <input name="name" type="text" placeholder="Nom de la créature" class="field font-normal">
-          <span class="error-message text-sm font-normal text-muted"></span>
+          <span id="erreur-nom" class="error-message text-sm font-normal text-muted"></span>
         </label>
         <label class="flex flex-col gap-1 text-sm font-bold">Type
           <select name="type" class="field font-normal">
@@ -149,32 +149,32 @@
             <option>Glace</option>
             <option>Ténèbres</option>
           </select>
-          <span class="error-message text-sm font-normal text-muted"></span>
+          <span id="erreur-type" class="error-message text-sm font-normal text-muted"></span>
         </label>
         <label class="flex flex-col gap-1 text-sm font-bold">Niveau
           <input name="level" type="text" placeholder="Base, Niveau 1…" class="field font-normal">
-          <span class="error-message text-sm font-normal text-muted"></span>
+          <span id="erreur-niveau" class="error-message text-sm font-normal text-muted"></span>
         </label>
         <label class="flex flex-col gap-1 text-sm font-bold">Statistique 1
           <input name="stat1" type="text" placeholder="0 à 999" class="field font-normal">
-          <span class="error-message text-sm font-normal text-muted"></span>
+          <span id="erreur-stat1" class="error-message text-sm font-normal text-muted"></span>
         </label>
         <label class="flex flex-col gap-1 text-sm font-bold">Statistique 2
           <input name="stat2" type="text" placeholder="0 à 999" class="field font-normal">
-          <span class="error-message text-sm font-normal text-muted"></span>
+          <span id="erreur-stat2" class="error-message text-sm font-normal text-muted"></span>
         </label>
         <label class="flex flex-col gap-1 text-sm font-bold">Statistique 3
           <input name="stat3" type="text" placeholder="0 à 999" class="field font-normal">
-          <span class="error-message text-sm font-normal text-muted"></span>
+          <span id="erreur-stat3" class="error-message text-sm font-normal text-muted"></span>
         </label>
         <label class="flex flex-col gap-1 text-sm font-bold">Lien de l'image
           <input name="image" type="text" placeholder="https://…/image.png" class="field font-normal">
-          <span class="error-message text-sm font-normal text-muted"></span>
+          <span id="erreur-image" class="error-message text-sm font-normal text-muted"></span>
         </label>
         <label class="flex flex-col gap-1 text-sm font-bold md:col-span-2 lg:col-span-4">Description
           <textarea name="description" rows="3" placeholder="10 à 200 caractères"
             class="rounded-xl border-2 border-line p-3 font-normal outline-none"></textarea>
-          <span class="error-message text-sm font-normal text-muted"></span>
+          <span id="erreur-description" class="error-message text-sm font-normal text-muted"></span>
         </label>
         <div class="flex flex-wrap justify-end gap-3 md:col-span-2 lg:col-span-4">
           <button type="reset" class="btn-outline px-6">Effacer</button>
