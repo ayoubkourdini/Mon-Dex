@@ -63,6 +63,8 @@
 const grid = document.getElementById("grid");
 const panneau = document.getElementById("panneau");
 const search = document.getElementById("search");
+const form = document.getElementById("creature-form");
+
 let texteActuel = "";
 let typeActuel = "Tous";
 
@@ -159,7 +161,19 @@ for (let i = 0; i < boutons.length; i++) {
   });
 }
 
-function creeCreature() { };
+function creeCreature() { 
+  form.addEventListener("submit", function(event){
+    event.preventDefault()
+    const numero = form.elements["id"].value.trim();
+    const nom = form.elements["name"].value.trim();
+    const type = form.elements["type"].value;
+    const niveau = form.elements["level"].value.trim();
+  console.log(form.elements["name"].value);  
+
+  });
+};
+creeCreature();
+
 
 function monEquipe() { };
 
