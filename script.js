@@ -162,13 +162,17 @@ for (let i = 0; i < boutons.length; i++) {
 }
 
 function creeCreature() { 
+  const regexNumero = /^#\d{3}$/;
+  const regexNom = /^[A-Za-zÀ-ÿ0-9][A-Za-zÀ-ÿ0-9 .'-]{1,29}$/;
+  const regexStat = /^\d{1,3}$/;
+  const regexImage = /^https:\/\/\S+\.(png|jpe?g|webp|gif)$/i;
+  const regexDescription = /^[\s\S]{10,200}$/;
   form.addEventListener("submit", function(event){
     event.preventDefault()
     const numero = form.elements["id"].value.trim();
     const nom = form.elements["name"].value.trim();
     const type = form.elements["type"].value;
-    const niveau = form.elements["level"].value.trim();
-  console.log(form.elements["name"].value);  
+    const niveau = form.elements["level"].value.trim();  
 
   });
 };
