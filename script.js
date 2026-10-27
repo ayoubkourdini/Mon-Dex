@@ -89,6 +89,7 @@ function affichage(liste) {
 `;
     grid.innerHTML += card;
   }
+  monEquipe();
 }
 affichage(creatures)
 
@@ -323,7 +324,16 @@ function monEquipe() {
   teamSlots.innerHTML = html;
   teamCount.textContent = equipe.length + "/6";
   teamCountNav.textContent = equipe.length;
-  
+
+  const boutonsAjout = document.querySelectorAll("[data-action='add'], #detail-add");
+
+  for (let i = 0; i < boutonsAjout.length; i++) {
+    if (equipe.length == 6) {
+      boutonsAjout[i].style.display = "none";
+    } else {
+      boutonsAjout[i].style.display = "";
+    }
+  }
 }
 monEquipe();
 
@@ -351,6 +361,7 @@ teamSlots.addEventListener("click", function (event) {
         equipe.splice(i, 1);
       }
     }
+    
 
     monEquipe();
   }
