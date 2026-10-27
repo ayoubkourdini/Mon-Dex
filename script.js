@@ -356,5 +356,14 @@ teamSlots.addEventListener("click", function (event) {
   }
 });
 
-
+function regleEquipe(creature) {
+  if (equipe.length == 6) {
+    alert("L'équipe est complète (6 maximum)");
+  } else if (equipe.includes(creature)) {
+    alert("Cette créature est déjà dans l'équipe");
+  } else {
+    equipe.push(creature);
+    monEquipe();
+  }
+}
 
