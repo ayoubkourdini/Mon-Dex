@@ -176,17 +176,23 @@ function creeCreature() {
   document.getElementById("erreur-numero").textContent = "";
 
   if (regexNumero.test(numero) == false) {
-    document.getElementById("erreur-numero").textContent = "Format : #010";
-     return;
+    document.getElementById("erreur-numero").textContent = "Format : #010"; 
   }
 
   document.getElementById("erreur-nom").textContent = "";
    if (regexNom.test(nom) == false) {
-    document.getElementById("erreur-nom").textContent = "2 à 30 caractères";
-    return;
+    document.getElementById("erreur-nom").textContent = "2 à 30 caractères. Commence par une lettre ou un chiffre";
    }
 
    document.getElementById("erreur-type").textContent = "";
+   if (type == "") {
+    document.getElementById("erreur-type").textContent = "Choisis un type";
+   }
+   document.getElementById("erreur-niveau").textContent = "";
+   if (niveau == "") {
+    document.getElementById("erreur-niveau").textContent = "Choisis un niveau";
+   }
+   document.getElementById()
   });
 
  
