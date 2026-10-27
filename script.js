@@ -169,7 +169,7 @@ function creeCreature() {
   const regexDescription = /^[\s\S]{10,200}$/;
   form.addEventListener("submit", function(event){
     event.preventDefault()
-    const numero = form.elements["id"].value.trim();
+    const numero = "#" + form.elements["id"].value.trim();
     const nom = form.elements["name"].value.trim();
     const type = form.elements["type"].value;
     const niveau = form.elements["level"].value.trim();
@@ -178,16 +178,19 @@ function creeCreature() {
     const stat3 = form.elements["stat3"].value.trim();
     const image = form.elements["image"].value.trim();
     const desc = form.elements["description"].value.trim();
+    let valide = true;
   document.getElementById("erreur-numero").textContent = "";
 
   if (regexNumero.test(numero) == false) {
-    document.getElementById("erreur-numero").textContent = "Format : #010"; 
-    
+    document.getElementById("erreur-numero").textContent = "Format : 010"; 
+    let valide = false;
   }
 
   for (let i = 0; i < creatures.length; i++) {
     if (numero === creatures[i].id) {
       document.getElementById("erreur-numero").textContent = "id déjà utilisé"
+    let valide = false;
+
     
     }
   }
@@ -195,41 +198,86 @@ function creeCreature() {
   document.getElementById("erreur-nom").textContent = "";
    if (regexNom.test(nom) == false) {
     document.getElementById("erreur-nom").textContent = "2 à 30 caractères. Commence par une lettre ou un chiffre";
+    let valide = false;
+
    }
 
    document.getElementById("erreur-type").textContent = "";
    if (type == "") {
     document.getElementById("erreur-type").textContent = "Choisis un type";
+    let valide = false;
+
    }
 
    document.getElementById("erreur-niveau").textContent = "";
    if (niveau == "") {
     document.getElementById("erreur-niveau").textContent = "Choisis un niveau";
+    let valide = false;
+
    }
 
    document.getElementById("erreur-stat1").textContent = "";
    if (regexStat.test(stat1) == false) {
     document.getElementById("erreur-stat1").textContent = "Nombre entier de 0 à 999 (ex. 45)"
+    let valide = false;
+
    }
 
    document.getElementById("erreur-stat2").textContent = "";
    if (regexStat.test(stat2) == false) {
     document.getElementById("erreur-stat2").textContent = "Nombre entier de 0 à 999 (ex. 45)"
+    let valide = false;
+
    } 
    document.getElementById("erreur-stat3").textContent = "";
    if (regexStat.test(stat3) == false) {
     document.getElementById("erreur-stat3").textContent = "Nombre entier de 0 à 999 (ex. 45)"
+    let valide = false;
+
    }
 
    document.getElementById("erreur-image").textContent = "";
    if (regexImage.test(image) == false) {
     document.getElementById("erreur-image").textContent = "Lien https finissant par .png, .jpg, .jpeg, .webp ou .gif"
+    let valide = false;
+
    }
 
    document.getElementById("erreur-description").textContent = "";
    if (regexDescription.test(desc) == false) {
     document.getElementById("erreur-description").textContent = "Entre 10 et 200 caractères"
+    let valide = false;
+
    }
+
+    if (valide === true) {
+      const nouvelleCreature = {
+        id: numero,
+        name: nom,
+        type: [type],
+        level: niveau,
+        stats: { hp: Number(stat1), attack: Number(stat2), defence: Number(stat3) },
+        image: image,
+        description: desc
+      };
+
+      creatures.push(nouvelleCreature);
+      filter();
+      form.reset();
+    }
+  });
+
+  form.elements["id"].addEventListener("input", function () {
+    const valeur = form.elements["id"].value;
+    const erreur = document.getElementById("erreur-numero");
+
+    if (/^\d*$/.test(valeur) === false) {
+      erreur.textContent = "Chiffres uniquement (ex. 010)";
+    } else if (valeur.length < 3) {
+      erreur.textContent = "Écris 3 chiffres (ex. 010)";
+    } else {
+      erreur.textContent = "";
+    }
   });
 
  
