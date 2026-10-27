@@ -16,7 +16,7 @@
 //
 // Pensez à citer la source de vos images dans le README.
 
-const creatures = [
+ const creatures = [
   {
     id: "#001",
     name: "Bulbasaur",
