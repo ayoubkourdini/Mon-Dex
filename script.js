@@ -90,6 +90,7 @@ function affichage(liste) {
     grid.innerHTML += card;
   }
   monEquipe();
+  document.getElementById("creature-count").textContent = creatures.length;
 }
 affichage(creatures)
 
