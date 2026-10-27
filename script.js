@@ -64,9 +64,12 @@ const grid = document.getElementById("grid");
 const panneau = document.getElementById("panneau");
 const search = document.getElementById("search");
 const form = document.getElementById("creature-form");
+const teamSlots = document.getElementById("team-slots")
+const teamCount = document.getElementById("team-count")
 
 let texteActuel = "";
 let typeActuel = "Tous";
+let equipe = [];
 
 function affichage(liste) {
   grid.innerHTML = "";
@@ -183,13 +186,13 @@ function creeCreature() {
 
   if (regexNumero.test(numero) == false) {
     document.getElementById("erreur-numero").textContent = "Format : 010"; 
-    let valide = false;
+    valide = false;
   }
 
   for (let i = 0; i < creatures.length; i++) {
     if (numero === creatures[i].id) {
       document.getElementById("erreur-numero").textContent = "id déjà utilisé"
-    let valide = false;
+     valide = false;
 
     
     }
@@ -198,55 +201,55 @@ function creeCreature() {
   document.getElementById("erreur-nom").textContent = "";
    if (regexNom.test(nom) == false) {
     document.getElementById("erreur-nom").textContent = "2 à 30 caractères. Commence par une lettre ou un chiffre";
-    let valide = false;
+    valide = false;
 
    }
 
    document.getElementById("erreur-type").textContent = "";
    if (type == "") {
     document.getElementById("erreur-type").textContent = "Choisis un type";
-    let valide = false;
+    valide = false;
 
    }
 
    document.getElementById("erreur-niveau").textContent = "";
    if (niveau == "") {
     document.getElementById("erreur-niveau").textContent = "Choisis un niveau";
-    let valide = false;
+    valide = false;
 
    }
 
    document.getElementById("erreur-stat1").textContent = "";
    if (regexStat.test(stat1) == false) {
     document.getElementById("erreur-stat1").textContent = "Nombre entier de 0 à 999 (ex. 45)"
-    let valide = false;
+    valide = false;
 
    }
 
    document.getElementById("erreur-stat2").textContent = "";
    if (regexStat.test(stat2) == false) {
     document.getElementById("erreur-stat2").textContent = "Nombre entier de 0 à 999 (ex. 45)"
-    let valide = false;
+    valide = false;
 
    } 
    document.getElementById("erreur-stat3").textContent = "";
    if (regexStat.test(stat3) == false) {
     document.getElementById("erreur-stat3").textContent = "Nombre entier de 0 à 999 (ex. 45)"
-    let valide = false;
+    valide = false;
 
    }
 
    document.getElementById("erreur-image").textContent = "";
    if (regexImage.test(image) == false) {
     document.getElementById("erreur-image").textContent = "Lien https finissant par .png, .jpg, .jpeg, .webp ou .gif"
-    let valide = false;
+    valide = false;
 
    }
 
    document.getElementById("erreur-description").textContent = "";
    if (regexDescription.test(desc) == false) {
     document.getElementById("erreur-description").textContent = "Entre 10 et 200 caractères"
-    let valide = false;
+    valide = false;
 
    }
 
@@ -285,7 +288,31 @@ function creeCreature() {
 creeCreature();
 
 
-function monEquipe() { };
+function monEquipe() { 
+  teamSlots.innerHTML = "";
+  let html = "";
+  for (let i = 0; i < 6; i++) {
+    if (equipe[i] != undefined) {
+      html += `
+      <div class="rounded-xl border p-4 text-center">
+        <img src="${equipe[i].image}" alt="${equipe[i].name}" class="mx-auto h-20">
+        <p class="font-bold">${equipe[i].name}</p>
+        <p>${equipe[i].type.join(" / ")}</p>
+        <button class="btn-retirer" data-id="${equipe[i].id}">Retirer</button>
+      </div>  
+      ` 
+    } else {
+      html += `
+          <div class="rounded-xl border-2 border-dashed p-4 text-center text-gray-400">
+            Emplacement libre
+          </div>  
+      `
+    }
+  }
+  teamSlots.innerHTML = html
+  teamCount.textContent = equipe.length + "/6"
+};
+monEquipe();
 
 function regleEquipe() { };
 
