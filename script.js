@@ -172,9 +172,24 @@ function creeCreature() {
     const numero = form.elements["id"].value.trim();
     const nom = form.elements["name"].value.trim();
     const type = form.elements["type"].value;
-    const niveau = form.elements["level"].value.trim();  
+    const niveau = form.elements["level"].value.trim();
+  document.getElementById("erreur-numero").textContent = "";
 
+  if (regexNumero.test(numero) == false) {
+    document.getElementById("erreur-numero").textContent = "Format : #010";
+     return;
+  }
+
+  document.getElementById("erreur-nom").textContent = "";
+   if (regexNom.test(nom) == false) {
+    document.getElementById("erreur-nom").textContent = "2 à 30 caractères";
+    return;
+   }
+
+   document.getElementById("erreur-type").textContent = "";
   });
+
+ 
 };
 creeCreature();
 
