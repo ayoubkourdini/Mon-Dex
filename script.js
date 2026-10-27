@@ -66,6 +66,8 @@ const search = document.getElementById("search");
 const form = document.getElementById("creature-form");
 const teamSlots = document.getElementById("team-slots")
 const teamCount = document.getElementById("team-count")
+const teamCountNav = document.getElementById("team-count-nav");
+let creatureOuverte;
 
 let texteActuel = "";
 let typeActuel = "Tous";
@@ -91,6 +93,8 @@ function affichage(liste) {
 affichage(creatures)
 
 function detail(c) {
+ creatureOuverte = c;
+
   document.getElementById("detail-id").textContent = c.id + " · Détail";
   document.getElementById("detail-name").textContent = c.name;
   document.getElementById("detail-type").textContent = c.type.join(", ");
@@ -127,6 +131,9 @@ grid.addEventListener("click", function (event) {
 document.getElementById("detail-close").addEventListener("click", function () {
   panneau.classList.add("hidden");
   panneau.classList.remove("flex");
+});
+document.getElementById("detail-add").addEventListener("click", function () {
+  regleEquipe(creatureOuverte);
 });
 
 function recherche(event) {
@@ -288,31 +295,66 @@ function creeCreature() {
 creeCreature();
 
 
-function monEquipe() { 
-  teamSlots.innerHTML = "";
+function monEquipe() {
   let html = "";
+
   for (let i = 0; i < 6; i++) {
     if (equipe[i] != undefined) {
       html += `
-      <div class="rounded-xl border p-4 text-center">
-        <img src="${equipe[i].image}" alt="${equipe[i].name}" class="mx-auto h-20">
-        <p class="font-bold">${equipe[i].name}</p>
-        <p>${equipe[i].type.join(" / ")}</p>
-        <button class="btn-retirer" data-id="${equipe[i].id}">Retirer</button>
-      </div>  
-      ` 
+      <div class="flex flex-col items-center gap-1 rounded-xl border-2 border-black bg-white p-2 text-center">
+        <img src="${equipe[i].image}" alt="${equipe[i].name}" class="h-16 w-16 object-contain">
+        <p class="text-sm font-bold">${equipe[i].name}</p>
+        <p class="text-xs text-muted">${equipe[i].type.join(" / ")}</p>
+        <button type="button" data-action="remove" data-id="${equipe[i].id}"
+          class="mt-1 w-full rounded-full border-2 border-red-600 px-2 py-1 text-xs font-bold text-red-600 hover:bg-red-600 hover:text-white">
+          Retirer
+        </button>
+      </div>
+      `;
     } else {
       html += `
-          <div class="rounded-xl border-2 border-dashed p-4 text-center text-gray-400">
-            Emplacement libre
-          </div>  
-      `
+      <div class="flex min-h-36 items-center justify-center rounded-xl border-2 border-dashed border-gray-300 p-2 text-xs text-gray-400">
+        Emplacement libre
+      </div>
+      `;
     }
   }
-  teamSlots.innerHTML = html
-  teamCount.textContent = equipe.length + "/6"
-};
+
+  teamSlots.innerHTML = html;
+  teamCount.textContent = equipe.length + "/6";
+  teamCountNav.textContent = equipe.length;
+  
+}
 monEquipe();
 
-function regleEquipe() { };
+grid.addEventListener("click", function (event) {
+  if (event.target.dataset.action == "add") {
+    let id = event.target.dataset.id;
+    let creature;
+
+    for (let i = 0; i < creatures.length; i++) {
+      if (creatures[i].id == id) {
+        creature = creatures[i];
+      }
+    }
+
+    regleEquipe(creature);
+  }
+});
+
+teamSlots.addEventListener("click", function (event) {
+  if (event.target.dataset.action == "remove") {
+    let id = event.target.dataset.id;
+
+    for (let i = 0; i < equipe.length; i++) {
+      if (equipe[i].id == id) {
+        equipe.splice(i, 1);
+      }
+    }
+
+    monEquipe();
+  }
+});
+
+
 
