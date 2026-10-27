@@ -177,10 +177,19 @@ function creeCreature() {
     const stat2 = form.elements["stat2"].value.trim();
     const stat3 = form.elements["stat3"].value.trim();
     const image = form.elements["image"].value.trim();
+    const desc = form.elements["description"].value.trim();
   document.getElementById("erreur-numero").textContent = "";
 
   if (regexNumero.test(numero) == false) {
     document.getElementById("erreur-numero").textContent = "Format : #010"; 
+    
+  }
+
+  for (let i = 0; i < creatures.length; i++) {
+    if (numero === creatures[i].id) {
+      document.getElementById("erreur-numero").textContent = "id déjà utilisé"
+    
+    }
   }
 
   document.getElementById("erreur-nom").textContent = "";
@@ -215,6 +224,11 @@ function creeCreature() {
    document.getElementById("erreur-image").textContent = "";
    if (regexImage.test(image) == false) {
     document.getElementById("erreur-image").textContent = "Lien https finissant par .png, .jpg, .jpeg, .webp ou .gif"
+   }
+
+   document.getElementById("erreur-description").textContent = "";
+   if (regexDescription.test(desc) == false) {
+    document.getElementById("erreur-description").textContent = "Entre 10 et 200 caractères"
    }
   });
 
