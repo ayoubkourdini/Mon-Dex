@@ -1,157 +1,139 @@
-# Mon Dex
+# [Nom du Dex] — Encyclopédie interactive
 
-Un petit Pokédex réalisé en HTML, Tailwind CSS et JavaScript, dans le cadre d'une formation (projet individuel Simplonline).
+> Un Dex rapide et responsive, pensé pour le téléphone, construit avec **Tailwind CSS** et **JavaScript** natif.
 
-**Démo en ligne :** https://ayoubkourdini.github.io/Mon-Dex/
-**Dépôt GitHub :https://github.com/ayoubkourdini/Mon-Dex.git** 
+🔗 **Dex en ligne :** [https://TON-PSEUDO.github.io/NOM-DU-DEPOT/](https://TON-PSEUDO.github.io/NOM-DU-DEPOT/)
 
 ## Univers choisi
 
-**Pokémon.** Le Dex contient 12 créatures au départ (Bulbasaur, Charmander, Charizard, Squirtle, Pikachu, Jigglypuff, Meowth, Psyduck, Machop, Geodude, Gastly, Gengar). Le thème graphique reprend les couleurs de l'univers : jaune dominant, bleu et rouge en couleurs secondaires, bordures noires épaisses.
+**[Pokémon / Digimon / Yu-Gi-Oh!]** — *(supprime les deux autres)*
+
+| Champ | Signification dans mon univers |
+| --- | --- |
+| `type` | [ex. Type : Feu, Eau, Plante…] |
+| `level` | [ex. Stade d'évolution] |
+| `stats` | [ex. PV, Attaque, Défense] |
 
 ## Fonctionnalités
 
-1. **Affichage** : la grille est construite avec JavaScript à partir du tableau `creatures` (fichier `data.js`).
-2. **Détail** : un clic sur une carte ouvre un panneau avec l'image, la description, le niveau et les statistiques en barres.
-3. **Recherche** : la liste se met à jour pendant la saisie du nom, sans tenir compte des majuscules.
-4. **Filtre** : les boutons de type n'affichent que les créatures du type choisi. « Tous » réinitialise le filtre. La recherche et le filtre fonctionnent ensemble.
-5. **Création d'une créature** : un formulaire validé par expressions régulières. Les messages d'erreur s'affichent sous chaque champ et une créature invalide n'est jamais ajoutée.
-6. **Mon équipe** : les boutons « Ajouter à l'équipe » (grille et panneau de détail) et « Retirer » sont gérés par la délégation d'événements, avec un seul écouteur sur la grille et un seul sur l'équipe.
-7. **Règles de l'équipe** : 6 créatures au maximum, pas de doublon, une alerte claire quand une action est refusée, un compteur x/6, et les boutons « Ajouter à l'équipe » disparaissent quand l'équipe est complète.
+### Obligatoires
+- [x] Affichage de la grille générée depuis le tableau `creatures`
+- [x] Panneau de détail (image, description, statistiques en barres)
+- [x] Recherche par nom en temps réel (insensible à la casse)
+- [x] Filtre par type, combinable avec la recherche
+- [x] Création d'une créature via un formulaire validé par expressions régulières
+- [x] Section « Mon équipe » avec délégation d'événements (ajout / retrait)
+- [x] Règles de l'équipe : 6 maximum, pas de doublon, messages clairs, compteur x/6
+
+### Bonus
+- [ ] LocalStorage (équipe et créatures créées conservées après rechargement)
+- [ ] Fetch API (chargement depuis [PokeAPI / API Digimon / YGOPRODeck], message de chargement et d'erreur)
+- [ ] Tri de la grille selon une statistique (croissant / décroissant)
+- [ ] Comparaison de deux créatures côte à côte
+
+*(coche uniquement ce que tu as réellement terminé)*
+
+## Technologies
+
+- HTML5
+- Tailwind CSS (thème personnalisé dans `tailwind.config.js`)
+- JavaScript (ES6+), sans framework
+- GitHub Pages pour l'hébergement
 
 ## Structure du projet
 
 ```
-Mon-Dex/
-├── index.html      # la page
-├── data.js         # le tableau creatures (12 Pokémon)
-├── script.js       # la logique JavaScript
-├── style.css       # le thème Pokémon
-├── dist/
-│   └── output.css  # CSS généré par Tailwind
+├── index.html
+├── data.js              # tableau d'au moins 12 créatures
+├── script.js            # logique du Dex
+├── tailwind.config.js   # couleurs et polices de l'univers
+├── src/ ou css/         # styles
 └── README.md
+```
+
+## Lancer le projet en local
+
+```bash
+git clone https://github.com/TON-PSEUDO/NOM-DU-DEPOT.git
+cd NOM-DU-DEPOT
+# Ouvrir index.html dans le navigateur (ou utiliser l'extension Live Server de VS Code)
 ```
 
 ## Sources des images
 
-Les images viennent du dépôt **PokeAPI/sprites** (artworks officiels), hébergé sur GitHub :
-https://github.com/PokeAPI/sprites
+Les images proviennent de sources officielles ou de bases de données publiques :
 
-Exemple d'URL utilisée :
-`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png`
+- [Nom de la source] — [URL]
+- [Autre source éventuelle] — [URL]
 
-Projet de fans réalisé à des fins pédagogiques. Pokémon et ses personnages sont des marques de Nintendo, Game Freak et Creatures Inc.
+## Validation du formulaire
 
-## Format des données
+Chaque champ est vérifié par une expression régulière. Le message d'erreur s'affiche sous le champ à la sortie (`blur`), et le formulaire ne peut pas être envoyé tant qu'un champ est invalide.
 
-Chaque créature de `data.js` suit ce format :
+| Champ | Expression régulière | Règle |
+| --- | --- | --- |
+| `id` | `/^#\d{3}$/` | `#` suivi de 3 chiffres |
+| `name` | `/^[A-Za-zÀ-ÿ0-9' .-]{2,40}$/` | 2 à 40 caractères |
+| `type` | liste fixe (`<select>`) ou `/^(Feu\|Eau\|Plante)$/` | valeur parmi une liste fixe *(adapte à ton univers)* |
+| `level` | `/^[A-Za-zÀ-ÿ0-9 '-]{1,30}$/` | texte court |
+| `stats` | `/^(0\|[1-9]\d{0,2})$/` | nombre entier de 0 à 999 |
+| `image` | `/^https:\/\/\S+$/` | lien `https` |
+| `description` | `/^[\s\S]{10,200}$/` | 10 à 200 caractères |
 
-```js
-{
-  id: "#025",
-  name: "Pikachu",
-  type: ["Électrik"],
-  level: "Intermédiaire",
-  stats: { hp: 35, attack: 55, defence: 40 },
-  image: "https://…/25.png",
-  description: "Une souris électrique qui stocke l'énergie dans les poches de ses joues."
-}
-```
+### Tests dans la console
 
-## Règles de validation du formulaire
-
-| Champ | Règle | Expression régulière |
-|---|---|---|
-| Numéro | `#` suivi de 3 chiffres, pas déjà utilisé (le `#` est ajouté par le code) | `/^#\d{3}$/` |
-| Nom | 2 à 30 caractères (lettres, chiffres, espaces, `.` `'` `-`), commence par une lettre ou un chiffre | `/^[A-Za-zÀ-ÿ0-9][A-Za-zÀ-ÿ0-9 .'-]{1,29}$/` |
-| Type | liste déroulante, un choix obligatoire | aucune (comparaison avec `""`) |
-| Niveau | liste déroulante, un choix obligatoire | aucune (comparaison avec `""`) |
-| PV, Attaque, Défense | entier de 0 à 999 | `/^\d{1,3}$/` |
-| Image | lien `https` finissant par png, jpg, jpeg, webp ou gif | `/^https:\/\/\S+\.(png\|jpe?g\|webp\|gif)$/i` |
-| Description | 10 à 200 caractères | `/^[\s\S]{10,200}$/` |
-
-## Tests des expressions régulières
-
-Les tests ont été faits dans la console du navigateur (F12), avec la méthode `.test()`. Chaque champ a au moins 2 valeurs valides et 2 valeurs invalides.
-
-Pour les refaire, collez ceci dans la console :
+Au moins 2 valeurs valides et 2 valeurs invalides par expression régulière.
 
 ```js
-const regexNumero = /^#\d{3}$/;
-const regexNom = /^[A-Za-zÀ-ÿ0-9][A-Za-zÀ-ÿ0-9 .'-]{1,29}$/;
-const regexStat = /^\d{1,3}$/;
-const regexImage = /^https:\/\/\S+\.(png|jpe?g|webp|gif)$/i;
-const regexDescription = /^[\s\S]{10,200}$/;
+// id
+const idRegex = /^#\d{3}$/;
+idRegex.test("#001");   // true
+idRegex.test("#999");   // true
+idRegex.test("001");    // false (pas de #)
+idRegex.test("#12");    // false (2 chiffres)
 
-console.log(regexNumero.test("#010"));   // true
-console.log(regexNumero.test("010"));    // false
+// name
+const nameRegex = /^[A-Za-zÀ-ÿ0-9' .-]{2,40}$/;
+nameRegex.test("Pikachu");   // true
+nameRegex.test("Mr. Mime");  // true
+nameRegex.test("A");         // false (trop court)
+nameRegex.test("<script>");  // false (caractères interdits)
+
+// stats (0 à 999)
+const statRegex = /^(0|[1-9]\d{0,2})$/;
+statRegex.test("0");      // true
+statRegex.test("999");    // true
+statRegex.test("1000");   // false (supérieur à 999)
+statRegex.test("-5");     // false (négatif)
+
+// image
+const imageRegex = /^https:\/\/\S+$/;
+imageRegex.test("https://example.com/001.png");  // true
+imageRegex.test("https://img.site.com/a.jpg");   // true
+imageRegex.test("http://example.com/001.png");   // false (http)
+imageRegex.test("example.com/001.png");          // false (pas de protocole)
+
+// description
+const descRegex = /^[\s\S]{10,200}$/;
+descRegex.test("Une courte description.");  // true
+descRegex.test("Dix lettres");              // true
+descRegex.test("Trop court");               // false (9 caractères)
+descRegex.test("a".repeat(201));            // false (201 caractères)
 ```
 
-### Numéro
+> Remplace ces tests par les résultats **réels** obtenus avec tes propres expressions régulières.
 
-| Valeur testée | Résultat attendu | Résultat obtenu |
-|---|---|---|
-| `#010` | valide | `true` |
-| `#123` | valide | `true` |
-| `010` (sans `#`) | invalide | `false` |
-| `#12` (2 chiffres) | invalide | `false` |
-| `#1234` (4 chiffres) | invalide | `false` |
+## Accessibilité et responsive
 
-### Nom
-
-| Valeur testée | Résultat attendu | Résultat obtenu |
-|---|---|---|
-| `Pikachu` | valide | `true` |
-| `Mr. Mime` | valide | `true` |
-| `A` (1 caractère) | invalide | `false` |
-| `-Pika` (commence par un tiret) | invalide | `false` |
-| `Pika@` (caractère interdit) | invalide | `false` |
-| 31 fois la lettre `a` | invalide | `false` |
-
-### Statistiques (PV, Attaque, Défense)
-
-| Valeur testée | Résultat attendu | Résultat obtenu |
-|---|---|---|
-| `0` | valide | `true` |
-| `45` | valide | `true` |
-| `999` | valide | `true` |
-| `1000` | invalide | `false` |
-| `-5` | invalide | `false` |
-| `abc` | invalide | `false` |
-| (vide) | invalide | `false` |
-
-### Image
-
-| Valeur testée | Résultat attendu | Résultat obtenu |
-|---|---|---|
-| `https://example.com/001.png` | valide | `true` |
-| `https://site.fr/img/pika.JPG` | valide | `true` |
-| `http://example.com/001.png` (pas https) | invalide | `false` |
-| `https://example.com/001.pdf` (extension interdite) | invalide | `false` |
-| `image.png` (pas un lien) | invalide | `false` |
-
-### Description
-
-| Valeur testée | Résultat attendu | Résultat obtenu |
-|---|---|---|
-| `Une courte description.` (23 caractères) | valide | `true` |
-| texte de 200 caractères | valide | `true` |
-| `Court` (5 caractères) | invalide | `false` |
-| texte de 201 caractères | invalide | `false` |
-| (vide) | invalide | `false` |
-
-## Lancer le projet en local
-
-1. Cloner le dépôt : `git clone https://github.com/ayoubkourdini/Mon-Dex.git`
-2. Ouvrir `index.html` dans le navigateur (ou utiliser l'extension Live Server de VS Code).
-3. Pour modifier les styles Tailwind, relancer la compilation vers `dist/output.css`.
+- Interface testée de **360 px à 1440 px** sans débordement
+- Styles de focus visibles sur tous les éléments cliquables
+- États survol, focus, erreur et désactivé cohérents avec la maquette
 
 ## Organisation du travail
 
-- Une carte GitHub Projects par fonctionnalité.
-- Au moins un commit par fonctionnalité, avec des messages de la forme `feat(team): …`, `fix(team): …` ou `style: …`.
-- Publication avec GitHub Pages.
+- **Commits** réguliers avec des messages clairs
+- **GitHub Projects** : une carte par modification et par fonctionnalité → [lien vers le tableau](https://github.com/users/TON-PSEUDO/projects/N)
 
 ## Auteur
 
-Ayoub Kourdini, projet de formation Simplonline.
+**[Ton prénom et nom]** — Simplon, brief individuel (19/10 – 26/10)
