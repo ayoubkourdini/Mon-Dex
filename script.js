@@ -173,6 +173,9 @@ function creeCreature() {
     const nom = form.elements["name"].value.trim();
     const type = form.elements["type"].value;
     const niveau = form.elements["level"].value.trim();
+    const stat1 = form.elements["stat1"].value.trim();
+    const stat2 = form.elements["stat2"].value.trim();
+    const stat3 = form.elements["stat3"].value.trim();
   document.getElementById("erreur-numero").textContent = "";
 
   if (regexNumero.test(numero) == false) {
@@ -192,7 +195,17 @@ function creeCreature() {
    if (niveau == "") {
     document.getElementById("erreur-niveau").textContent = "Choisis un niveau";
    }
-   document.getElementById()
+   document.getElementById("erreur-stat1").textContent = "";
+   if (regexStat.test(stat1) == false) {
+    document.getElementById("erreur-stat1").textContent = "Nombre entier de 0 à 999 (ex. 45)"
+   }
+   document.getElementById("erreur-stat2").textContent = "";
+   if (regexStat.test(stat2) == false) {
+    document.getElementById("erreur-stat2").textContent = "Nombre entier de 0 à 999 (ex. 45)"
+   }   document.getElementById("erreur-stat3").textContent = "";
+   if (regexStat.test(stat3) == false) {
+    document.getElementById("erreur-stat3").textContent = "Nombre entier de 0 à 999 (ex. 45)"
+   }
   });
 
  

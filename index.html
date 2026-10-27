@@ -152,18 +152,24 @@
           <span id="erreur-type" class="error-message text-sm font-normal text-muted"></span>
         </label>
         <label class="flex flex-col gap-1 text-sm font-bold">Niveau
-          <input name="level" type="text" placeholder="Base, Niveau 1…" class="field font-normal">
+          <select name="level" class="field font-normal">
+            <option value="">Choisir un niveau</option>
+            <option>Base</option>
+            <option>Intermédiaire</option>
+            <option>Final</option>
+          </select>
+          <!-- <input name="level" type="text" placeholder="Base, Niveau 1…" class="field font-normal"> -->
           <span id="erreur-niveau" class="error-message text-sm font-normal text-muted"></span>
         </label>
-        <label class="flex flex-col gap-1 text-sm font-bold">Statistique 1
+        <label class="flex flex-col gap-1 text-sm font-bold">PV
           <input name="stat1" type="text" placeholder="0 à 999" class="field font-normal">
           <span id="erreur-stat1" class="error-message text-sm font-normal text-muted"></span>
         </label>
-        <label class="flex flex-col gap-1 text-sm font-bold">Statistique 2
+        <label class="flex flex-col gap-1 text-sm font-bold">Attaque
           <input name="stat2" type="text" placeholder="0 à 999" class="field font-normal">
           <span id="erreur-stat2" class="error-message text-sm font-normal text-muted"></span>
         </label>
-        <label class="flex flex-col gap-1 text-sm font-bold">Statistique 3
+        <label class="flex flex-col gap-1 text-sm font-bold">Défense
           <input name="stat3" type="text" placeholder="0 à 999" class="field font-normal">
           <span id="erreur-stat3" class="error-message text-sm font-normal text-muted"></span>
         </label>
